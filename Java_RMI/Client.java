@@ -1,4 +1,5 @@
 
+import java.io.Console;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
@@ -27,8 +28,7 @@ public class Client extends UnicastRemoteObject implements ChatRoom_interface{
         try
         {
             String response = room.get();
-            System.out.println("POST");
-            System.out.println("response: " + response);
+            System.out.println("messages: " + response);
             }
         catch (Exception e) {};
     }
@@ -48,16 +48,30 @@ public class Client extends UnicastRemoteObject implements ChatRoom_interface{
     }
     public static void main(String[] args) {
         String host = (args.length < 1) ? null : args[0];
+        Console console = System.console();
         try {
+
+            boolean loop = true;
+            String message = "";
+
             Registry registry = LocateRegistry.getRegistry(host);
             Client client = new Client(((ChatRoom) registry.lookup("Hello")) );
-            
             client.register();
-            
-            client.post("hello");
-            client.post("123");
             client.call();
-            client.waiting();
+
+
+            while (loop) {
+                System.out.println("Press 1 to exit");
+                message = console.readLine();
+                if (message.equals("1")){
+                    loop=false;
+                }
+                client.post(message);
+                client.call();
+            }
+
+            
+
 
         } catch (Exception e) {
             System.err.println("Client exception: " + e.toString());

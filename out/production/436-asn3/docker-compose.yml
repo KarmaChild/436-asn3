@@ -20,13 +20,3 @@ services:
     - ./:/code
     stdin_open: true
     tty: true
-  java3:
-    image: openjdk:19
-    container_name: java3
-    ports:
-      - "8082:8080"
-    command: [ "bin/bash" ]
-    volumes:
-      - ./:/code
-    stdin_open: true
-    tty: true

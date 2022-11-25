@@ -2,6 +2,7 @@
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.Hashtable;
 
 public interface ChatRoom extends Remote {
     //get chatroom

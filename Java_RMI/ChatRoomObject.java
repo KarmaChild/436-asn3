@@ -6,10 +6,13 @@ import java.util.*;
 
 public class ChatRoomObject implements ChatRoom {
     // Hashmap that stores Chatroom name
+    HashMap<String, ArrayList<String>> chatrooms = new HashMap<String, ArrayList<String>>();
     static ArrayList<String> posts = new ArrayList<String>();
     static ArrayList<ChatRoom_interface> clients = new ArrayList<ChatRoom_interface>();
    
-    public ChatRoomObject() {}
+    public ChatRoomObject() {
+
+    }
     
     //get chatroom
     public String get()
